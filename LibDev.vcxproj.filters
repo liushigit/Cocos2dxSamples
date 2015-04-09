@@ -33,6 +33,7 @@
     <ClCompile Include="..\Classes\lib\animutils\AnimUtils.cpp">
       <Filter>lib</Filter>
     </ClCompile>
+    <ClCompile Include="RunScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -53,6 +54,7 @@
     <ClInclude Include="..\Classes\lib\animutils\AnimUtils.h">
       <Filter>lib</Filter>
     </ClInclude>
+    <ClInclude Include="RunScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

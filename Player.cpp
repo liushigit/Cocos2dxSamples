@@ -25,7 +25,7 @@ bool Player::init() {
 	auto animationCache = AnimationCache::getInstance();
 	animationCache->addAnimation(animation_run, std::string{ "player_run" });
 
-
+	velocity = 0;
 	this->animate_action_run = Animate::create(animation_run);
 
 	this->scheduleUpdate();
@@ -34,7 +34,10 @@ bool Player::init() {
 
 void Player::update(float dt) {
 	float x = getPositionX();
-	setPositionX(x + dt * velocity);
+	float y = getPositionY();
+	//setPositionX(x + dt * velocity);
+	log(velocity);
+	setTargetPosition(x + dt * velocity, y);
 }
 
 void Player::stop() {
@@ -42,7 +45,7 @@ void Player::stop() {
 	animation->setLoops(1);
 
 	// _sprite->stopAction(this->animate_action_run);
-	// _sprite->setDisplayFrameWithAnimationName("player_run", 0);
+	_sprite->setDisplayFrameWithAnimationName("player_run", 0);
 }
 
 void Player::run() {
@@ -51,4 +54,47 @@ void Player::run() {
 
 void Player::setVelocity(double v) {
 	velocity = v;
+}
+
+void Player::setTiledMap(TMXTiledMap *map){
+	// p.184
+	this->_map = map;
+	_meta = map->getLayer("meta");
+	// _meta->setVisible(false);
+	_meta->setVisible(false);
+
+}
+
+void Player::setTargetPosition(int x, int y) {
+	Size spriteSize = _sprite->getContentSize();
+	Point dstPos = Point( x + spriteSize.width / 2, y );
+
+	Point tilePos = tileCoordForPosition(Point(dstPos.x, dstPos.y));
+	log(tilePos.x);
+	int tileGid = this->_meta->getTileGIDAt(tilePos);
+
+	if (tileGid != 0) {
+		Value props = _map->getPropertiesForGID(tileGid);
+		Value prop = props.asValueMap().at("collidable");
+		if (prop.asString().compare("true") == 0) {
+				return;
+		}
+	}
+	Node::setPosition(x, y);
+}
+
+Point Player::tileCoordForPosition(Point pos)
+{
+	Size tileSize = _map->getTileSize();
+	int x = pos.x / tileSize.width;
+	int y = (700 - pos.y) / tileSize.height;
+	if (x > 0) {
+		x -= 0;
+	}
+	if (y > 0) {
+		y += 1;
+	}
+
+	return Point( x, y );
+
 }

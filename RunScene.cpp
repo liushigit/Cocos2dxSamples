@@ -1,4 +1,5 @@
 #include "RunScene.h"
+#include "TMXPlatform.h"
 using namespace cocos2d;
 
 RunScene::RunScene()
@@ -18,8 +19,12 @@ bool RunScene::init() {
 	log("map....");
 	TMXTiledMap * map = TMXTiledMap::create("map.tmx");
 
-	this->addChild(map);
-	this->addPlayer(map);
+	auto platform = TMXPlatform::create();
+	platform->setTiledMap(map);
+	this->addChild(platform);
+
+	// this->addChild(map);
+	this->addPlayer(platform);
 
 	auto keyboard_listener = EventListenerKeyboard::create();
 	keyboard_listener->onKeyPressed = CC_CALLBACK_2(RunScene::onKeyPressed, this);
@@ -44,15 +49,15 @@ Scene* RunScene::createScene()
 	return scene;
 }
 
-void RunScene::addPlayer(cocos2d::TMXTiledMap *map) {
+void RunScene::addPlayer(TMXPlatform * platform) {
 
 	_player = Player::create();
 	/*Sprite* playerSprite = Sprite::create("player.png");
 	_player->bindSprite(playerSprite);*/
 
 	_player->setPosition(Vec2{ 70, 150 });
-	_player->setTiledMap(map);
-
+	// _player->setTiledMap(map);
+	_player->setPlatform(platform);
 	_player->run();
 	this->addChild(_player);
 }

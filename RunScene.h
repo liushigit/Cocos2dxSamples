@@ -14,7 +14,7 @@ public:
 protected:
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event * event);
 	virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event * event);
-	void addPlayer(cocos2d::TMXTiledMap *map);
+	void addPlayer(TMXPlatform * platform);
 	Player * _player;
 };
 

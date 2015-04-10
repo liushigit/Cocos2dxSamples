@@ -2,6 +2,7 @@
 #include "cocos2d.h"
 #include "GameObject.h"
 
+class TMXPlatform;
 
 using namespace cocos2d;
 
@@ -17,13 +18,15 @@ public:
 	virtual void stop();
 	virtual void update(float dt);
 	virtual void setVelocity(double v);
-	virtual void setTiledMap(TMXTiledMap *map);
+	
+	virtual void setPlatform(TMXPlatform *);
 	virtual void Player::setTargetPosition(int x, int y);
 protected:
 	Animate * animate_action_run;
 	double velocity;
-	TMXTiledMap *_map;
-	Point tileCoordForPosition(Point pos);
+	
+	TMXPlatform *_platform;
+
 	TMXLayer *_meta;
 };
 

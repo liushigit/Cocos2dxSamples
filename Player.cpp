@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "TMXPlatform.h"
 #include "animutils/AnimUtils.h"
 #include <string>
 
@@ -56,45 +57,18 @@ void Player::setVelocity(double v) {
 	velocity = v;
 }
 
-void Player::setTiledMap(TMXTiledMap *map){
-	// p.184
-	this->_map = map;
-	_meta = map->getLayer("meta");
-	// _meta->setVisible(false);
-	_meta->setVisible(false);
 
+void Player::setPlatform(TMXPlatform *platform){
+	_platform = platform;
 }
 
 void Player::setTargetPosition(int x, int y) {
 	Size spriteSize = _sprite->getContentSize();
 	Point dstPos = Point( x + spriteSize.width / 2, y );
-
-	Point tilePos = tileCoordForPosition(Point(dstPos.x, dstPos.y));
-	log(tilePos.x);
-	int tileGid = this->_meta->getTileGIDAt(tilePos);
-
-	if (tileGid != 0) {
-		Value props = _map->getPropertiesForGID(tileGid);
-		Value prop = props.asValueMap().at("collidable");
-		if (prop.asString().compare("true") == 0) {
-				return;
-		}
+	
+	if (_platform->isCollidableAtPositionInLayerNamed(dstPos, "meta")) {
+		return;
 	}
+	
 	Node::setPosition(x, y);
-}
-
-Point Player::tileCoordForPosition(Point pos)
-{
-	Size tileSize = _map->getTileSize();
-	int x = pos.x / tileSize.width;
-	int y = (700 - pos.y) / tileSize.height;
-	if (x > 0) {
-		x -= 0;
-	}
-	if (y > 0) {
-		y += 1;
-	}
-
-	return Point( x, y );
-
 }

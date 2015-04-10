@@ -34,6 +34,9 @@
       <Filter>lib</Filter>
     </ClCompile>
     <ClCompile Include="RunScene.cpp" />
+    <ClCompile Include="TMXPlatform.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -55,6 +58,9 @@
       <Filter>lib</Filter>
     </ClInclude>
     <ClInclude Include="RunScene.h" />
+    <ClInclude Include="TMXPlatform.h">
+      <Filter>lib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

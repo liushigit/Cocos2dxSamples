@@ -36,8 +36,7 @@ bool Player::init() {
 void Player::update(float dt) {
 	float x = getPositionX();
 	float y = getPositionY();
-	//setPositionX(x + dt * velocity);
-	log(velocity);
+	
 	setTargetPosition(x + dt * velocity, y);
 }
 

@@ -16,7 +16,7 @@ bool RunScene::init() {
 	{
 		return false;
 	}
-	log("map....");
+	
 	TMXTiledMap * map = TMXTiledMap::create("map.tmx");
 
 	auto platform = TMXPlatform::create();

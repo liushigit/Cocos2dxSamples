@@ -21,9 +21,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>lib</Filter>
     </ClCompile>
@@ -37,15 +34,14 @@
     <ClCompile Include="TMXPlatform.cpp">
       <Filter>lib</Filter>
     </ClCompile>
+    <ClCompile Include="HelloWorldScene.cpp" />
+    <ClCompile Include="AnimationScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -61,6 +57,8 @@
     <ClInclude Include="TMXPlatform.h">
       <Filter>lib</Filter>
     </ClInclude>
+    <ClInclude Include="HelloWorldScene.h" />
+    <ClInclude Include="AnimationScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

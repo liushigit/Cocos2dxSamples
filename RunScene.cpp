@@ -23,7 +23,6 @@ bool RunScene::init() {
 	platform->setTiledMap(map);
 	this->addChild(platform);
 
-	// this->addChild(map);
 	this->addPlayer(platform);
 
 	auto keyboard_listener = EventListenerKeyboard::create();

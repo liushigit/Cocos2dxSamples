@@ -31,6 +31,19 @@ bool RunScene::init() {
 	keyboard_listener->onKeyReleased = CC_CALLBACK_2(RunScene::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboard_listener, this);
 
+	auto particleSystem = ParticleSystemQuad::create("particles/magic.plist");
+	particleSystem->setPosition(Point{300, 300});
+	particleSystem->setScale(3.f);
+	this->addChild(particleSystem);
+	this->scheduleUpdate();
+
+	NotificationCenter::getInstance()->addObserver(
+		this,
+		callfuncO_selector(RunScene::onCollision),
+		"collision",
+		nullptr);
+
+
 	return true;
 }
 
@@ -58,8 +71,9 @@ void RunScene::addPlayer(TMXPlatform * platform) {
 	_player->setPosition(Vec2{ 70, 150 });
 	// _player->setTiledMap(map);
 	_player->setPlatform(platform);
-	_player->run();
+	
 	this->addChild(_player);
+	_player->run();
 }
 
 void RunScene::onKeyPressed(EventKeyboard::KeyCode keycode, Event * event) {
@@ -78,4 +92,10 @@ void RunScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event * event) {
 		keycode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
 		_player->setVelocity(0);
 	}
+}
+
+#pragma mark Handling Notification
+
+void RunScene::onCollision(Ref* sender) {
+	cocos2d::log("Hi iiiii ");
 }

@@ -65,7 +65,20 @@ void Player::setTargetPosition(int x, int y) {
 	Size spriteSize = _sprite->getContentSize();
 	Point dstPos = Point( x + spriteSize.width / 2, y );
 	
+	// 如果Player的位置 >= 中点， Player不动，平台向反方向动。
+	Size viewPortSize = Director::getInstance()->getVisibleSize();
+	/*auto director = Director::getInstance();
+	Size viewPortSize = director->getVisibleSize();*/
+
+
+	if (x >= viewPortSize.width / 2) {
+		float distance = x - this->getPositionX();
+		_platform->setPositionX(_platform->getPositionX() - distance);
+		return;
+	}
+
 	if (_platform->isCollidableAtPositionInLayerNamed(dstPos, "meta")) {
+		NotificationCenter::getInstance()->postNotification("collision");
 		return;
 	}
 	

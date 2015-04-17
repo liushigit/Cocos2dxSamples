@@ -9,6 +9,8 @@ public:
 	static cocos2d::Scene* createScene();
 	CREATE_FUNC(RunScene);
 	virtual bool init();
+	void RunScene::onCollision(Ref* sender);
+
 	RunScene();
 	~RunScene();
 protected:
